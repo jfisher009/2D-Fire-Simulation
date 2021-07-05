@@ -5,26 +5,25 @@
 // Description: Defines a class that extends Tile to have properties to work in 
 //              the fire simulation
 
-// lists of colors to choos from for each state
-const FIRE_COLORS = ["red","yellow","white","orange"]
-const FUEL_COLORS = ["Brown","SaddleBrown","SandyBrown"]
-const ASH_COLORS = ["Black","Gray","SlateGray","DarkSlateGray"]
-
-// constants for state of tile 
-const FUEL = "fuel"
-const FIRE = "fire"
-const ASH = "ash"
-
-// Variables for the chance of a fuel tile to catch on fire if another fire tile is nearby
-const CHANCE_TO_CATCH = 0.1;
-
-// Variable for the chance of a fire tile to turn to ash every frame
-const CHANCE_TO_EXTINGUISH = .005;
-
-
 // Class: FireSimTile
 // Makes a tile that starts as fuel for the fire
 class FireSimTile extends Tile{
+    // lists of colors to choos from for each state
+    static FIRE_COLORS = ["red","yellow","white","orange"]
+    static FUEL_COLORS = ["Brown","SaddleBrown","SandyBrown"]
+    static ASH_COLORS = ["Black","Gray","SlateGray","DarkSlateGray"]
+
+    // static variables for state of tile 
+    static FUEL = "fuel"
+    static FIRE = "fire"
+    static ASH = "ash"
+
+    // static variable for the chance of a fuel tile to catch on fire if another fire tile is nearby
+    static CHANCE_TO_CATCH = 0.1;
+
+    // static variable for the chance of a fire tile to turn to ash every frame
+    static CHANCE_TO_EXTINGUISH = .005;
+
 
     // Make a fuel tile that starts out as brown to represents wood
     constructor(){
