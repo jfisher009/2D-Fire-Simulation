@@ -5,30 +5,31 @@
 // Description: Defines a class that extends Tile to have properties to work in 
 //              the fire simulation
 
+
+// lists of colors to choos from for each state
+const FIRE_COLORS = ["red","yellow","white","orange"]
+const FUEL_COLORS = ["Brown","SaddleBrown","SandyBrown"]
+const ASH_COLORS = ["Black","Gray","SlateGray","DarkSlateGray"]
+
+// static variables for state of tile 
+const FUEL = "fuel"
+const FIRE = "fire"
+const ASH = "ash"
+
+// static variables for the chance of a fuel tile to catch on fire if another fire tile is nearby
+const CHANCE_TO_CATCH = 0.1;
+
+// Static variable for the chance of a fire tile to turn to ash every frame
+const CHANCE_TO_EXTINGUISH = .02;
+
 // Class: FireSimTile
 // Makes a tile that starts as fuel for the fire
 class FireSimTile extends Tile{
-    // lists of colors to choos from for each state
-    static FIRE_COLORS = ["red","yellow","white","orange"]
-    static FUEL_COLORS = ["Brown","SaddleBrown","SandyBrown"]
-    static ASH_COLORS = ["Black","Gray","SlateGray","DarkSlateGray"]
-
-    // static variables for state of tile 
-    static FUEL = "fuel"
-    static FIRE = "fire"
-    static ASH = "ash"
-
-    // static variable for the chance of a fuel tile to catch on fire if another fire tile is nearby
-    static CHANCE_TO_CATCH = 0.1;
-
-    // static variable for the chance of a fire tile to turn to ash every frame
-    static CHANCE_TO_EXTINGUISH = .005;
-
 
     // Make a fuel tile that starts out as brown to represents wood
     constructor(){
         super();
-        this.state = FIRE;
+        this.state = FUEL;
     }
 
     // Draw the tile on the board, at the given location with the given side length.
@@ -38,7 +39,7 @@ class FireSimTile extends Tile{
     //  sideLenfth: the length in pixels of the Tile to be drawn
     show(xCoor, yCoor, sideLength){
         //if the tile is on fire, choose a random color to give burning effect
-        if(this._state === FIRE){
+        if(this._state === FIRE_STATE){
             //select a random color to draw
             this.color = FIRE_COLORS[Math.floor(Math.random() * FIRE_COLORS.length)];
 
@@ -61,7 +62,7 @@ class FireSimTile extends Tile{
             this.state = FIRE;
         }
         // fire has a chance to extinguish and turn to ash 
-        else if(this.state == FIRE && Math.random <= CHANCE_TO_EXTINGUISH){
+        else if(this.state == FIRE && Math.random() <= CHANCE_TO_EXTINGUISH){
             this.state = ASH;
         }
         // if not fuel near fire, or already on fire, no state change occurs
@@ -84,8 +85,8 @@ class FireSimTile extends Tile{
             this.color = FUEL_COLORS[Math.floor(Math.random() * FUEL_COLORS.length)];
         }
         //if the new state is FIRE, update tile state and set to an appropriate color
-        else if(newState.toLowerCase() == FIRE){
-            this._state = FIRE;
+        else if(newState.toLowerCase() == FIRE_STATE){
+            this._state = FIRE_STATE;
             this.color = FIRE_COLORS[Math.floor(Math.random() * FIRE_COLORS.length)];
         }
         //if the new state is ASH, update tile state and set to an appropriate color
